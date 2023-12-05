@@ -1,8 +1,12 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import SavedRecipes from '../components/SavedRecipes.vue';
+import RecipeDetail from '../components/RecipeDetail.vue';
+import NewRecipe from '../components/NewRecipe.vue';
+import { getAuth } from 'firebase/auth';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -11,13 +15,32 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/saved-recipes',
+    name: 'SavedRecipes',
+    component: SavedRecipes,
+    meta: {
+      requiresAuth: true, // Add this meta field to require authentication
+    },
+    beforeEnter: (to, from, next) => {
+      const auth = getAuth();
+      if (auth.currentUser) {
+        next();
+      } else {
+        next('/');
+      }
+    },
+  },
+  {
+    path: '/recipe/:id',
+    name: 'RecipeDetail',
+    component: RecipeDetail,
+  },
+  {
+    path: '/new-recipe',
+    name: 'NewRecipe',
+    component: NewRecipe,
+    meta: { requiresAuth: true },
+  },
 ]
 
 const router = new VueRouter({
