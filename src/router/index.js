@@ -19,7 +19,7 @@ const routes = [
     name: 'SavedRecipes',
     component: SavedRecipes,
     meta: {
-      requiresAuth: true, // Add this meta field to require authentication
+      requiresAuth: true, 
     },
     beforeEnter: (to, from, next) => {
       const auth = getAuth();

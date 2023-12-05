@@ -60,8 +60,8 @@ methods: {
   right: 20px;
   padding: 10px 20px;
   height: 50px;
-  border-radius: 15px; /* Adjust the percentage for the bottom-right corner */
-  background-color: #4caf50; /* Green color, change as needed */
+  border-radius: 15px; 
+  background-color: #4caf50;
   color: white;
   font-size: 18px;
   border: none;

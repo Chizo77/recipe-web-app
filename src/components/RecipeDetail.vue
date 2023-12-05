@@ -20,7 +20,6 @@ export default {
     };
   },
   mounted() {
-    // Fetch data from Firestore when the component is mounted
     this.fetchRecipes();
   },
   methods: {
